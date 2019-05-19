@@ -23,7 +23,7 @@ namespace JPanBackprop
             {
                 network.Compute(inputs[i]);
                 CalculateError(desiredOutput[i]);
-                CalculateUpdates(inputs[i], 0.5);
+                CalculateUpdates(inputs[i], 0.2);
             }
 
             ApplyUpdates();
@@ -82,7 +82,7 @@ namespace JPanBackprop
             for (int i = 0; i < inputLayer.Neurons.Length; i++)
             {
                 Neuron neuron = inputLayer.Neurons[i];
-                for (int j = 0; j < neuron.Weights  .Length; j++)
+                for (int j = 0; j < neuron.Weights.Length; j++)
                 {
                     neuron.WeightUpdates[j] += learningRate * neuron.PartialDerivative * input[j];
                 }
@@ -122,7 +122,7 @@ namespace JPanBackprop
                     neuron.Bias += biasChange;
                     neuron.PrevBiasUpdate = biasChange;
                 }
-            }   //something wrong in this class with putting same output for literally everything
-        }       //changing everything's weight by the same value
+            }   
+        }       
     }
 }

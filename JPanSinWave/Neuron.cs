@@ -51,12 +51,12 @@ namespace JPanBackprop
 
         public double Derivative(double x)
         {
-            return Function(x) * (1 - Function(x));
+            return 1 - Math.Pow(Function(x), 2);
         }
 
         public double Function(double x)
         {
-            return 1 / (1 + Math.Exp(-x));
+            return (Math.Exp(x) - Math.Exp(-x)) / (Math.Exp(x) + Math.Exp(-x));
         }
     }
 }
