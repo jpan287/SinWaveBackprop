@@ -8,3 +8,13 @@
 \\GMRDC1\Folder Redirection\Johnny.Pan\Documents\Visual Studio 2019\Projects\JPanSinWave\JPanSinWave\bin\Debug\JPanSinWave.pdb
 \\GMRDC1\Folder Redirection\Johnny.Pan\Documents\Visual Studio 2019\Projects\JPanSinWave\JPanSinWave\obj\Debug\JPanSinWave.exe
 \\GMRDC1\Folder Redirection\Johnny.Pan\Documents\Visual Studio 2019\Projects\JPanSinWave\JPanSinWave\obj\Debug\JPanSinWave.pdb
+C:\Users\Lumastars3\Documents\Visual Studio 2019\Projects\SinWaveBackprop\JPanSinWave\bin\Debug\JPanSinWave.exe.config
+C:\Users\Lumastars3\Documents\Visual Studio 2019\Projects\SinWaveBackprop\JPanSinWave\bin\Debug\JPanSinWave.exe
+C:\Users\Lumastars3\Documents\Visual Studio 2019\Projects\SinWaveBackprop\JPanSinWave\bin\Debug\JPanSinWave.pdb
+C:\Users\Lumastars3\Documents\Visual Studio 2019\Projects\SinWaveBackprop\JPanSinWave\obj\Debug\JPanSinWave.csprojAssemblyReference.cache
+C:\Users\Lumastars3\Documents\Visual Studio 2019\Projects\SinWaveBackprop\JPanSinWave\obj\Debug\JPanSinWave.Form1.resources
+C:\Users\Lumastars3\Documents\Visual Studio 2019\Projects\SinWaveBackprop\JPanSinWave\obj\Debug\JPanSinWave.Properties.Resources.resources
+C:\Users\Lumastars3\Documents\Visual Studio 2019\Projects\SinWaveBackprop\JPanSinWave\obj\Debug\JPanSinWave.csproj.GenerateResource.cache
+C:\Users\Lumastars3\Documents\Visual Studio 2019\Projects\SinWaveBackprop\JPanSinWave\obj\Debug\JPanSinWave.csproj.CoreCompileInputs.cache
+C:\Users\Lumastars3\Documents\Visual Studio 2019\Projects\SinWaveBackprop\JPanSinWave\obj\Debug\JPanSinWave.exe
+C:\Users\Lumastars3\Documents\Visual Studio 2019\Projects\SinWaveBackprop\JPanSinWave\obj\Debug\JPanSinWave.pdb

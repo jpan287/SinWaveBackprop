@@ -44,18 +44,18 @@ namespace JPanSinWave
 
         private void Timer1_Tick(object sender, EventArgs e)
         {
-            for (double x = 0; x < Width; x++)
+            for (double x = 0; x < Width; x += 0.001)
             {
-                graphics.FillRectangle(brush, new RectangleF())
+                graphics.FillRectangle(brush, new RectangleF((float)x, Height / 2 + 100 * (float)Math.Sin(x / 50), 2, 2));
             }
 
-            //for (double x = -2 * Math.PI; x < 2 * Math.PI; x += Math.PI / 8)
+            //for (double x = 0; x < Width; x += 1)
             //{
             //    for (int i = 0; i < 500; i++)
             //    {
             //        trainer.GradientDescent(new double[][] { inputs }, new double[][] { outputs });
             //    }
-            //    graphics.FillRectangle(brush, new Rectangle((int)(x + 2 * Math.PI), (int)network.Compute(new double[] { x })[0], 2, 2));
+            //    graphics.FillRectangle(brush, new RectangleF((float)x, (int)network.Compute(new double[] { x })[0], 2, 2));
             //}
 
         }
