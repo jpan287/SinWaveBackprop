@@ -123,6 +123,14 @@ namespace JPanBackprop
                     neuron.PrevBiasUpdate = biasChange;
                 }
             }   
-        }       
+        }
+        
+        public void SGD(double[] inputs, double[] desiredOutputs, int batchSize)
+        {
+            for (int i = 0; i < inputs.Length; i += batchSize)
+            {
+                GradientDescent(inputs.)
+            }
+        }
     }
 }
