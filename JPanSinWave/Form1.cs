@@ -19,8 +19,12 @@ namespace JPanSinWave
         SolidBrush brush = new SolidBrush(Color.Black);
         Trainer trainer;
         Graphics graphics;
+        Graph graph;
         double[][] inputs;
         double[][] outputs;
+
+        double leftTrainBound;
+        double rightTrainBound;
 
         public Form1()
         {
@@ -28,11 +32,13 @@ namespace JPanSinWave
         }
         private void Form1_Load(object sender, EventArgs e)
         {
+            leftTrainBound = 0;
+            rightTrainBound = 300;
             trainer = new Trainer(network);
             graphics = this.CreateGraphics();
             network.Randomize(rand);
-            inputs = new double[100][];
-            outputs = new double[100][];
+            inputs = new double[20][];
+            outputs = new double[20][];
             for (int i = 0; i < inputs.Length; i++)
             {
                 inputs[i] = new double[1];
@@ -40,29 +46,37 @@ namespace JPanSinWave
             }
             for (int i = 0; i < outputs.Length; i++)
             {
-                inputs[i][0] = i / 5 * Math.PI;
-                outputs[i][0] = Math.Sin(i / 5 * Math.PI);
+                inputs[i][0] = i * (rightTrainBound - leftTrainBound / outputs.Length);
+                outputs[i][0] = Math.Sin(i * (rightTrainBound - leftTrainBound / outputs.Length));
             }
+            graph = new Graph(Width, Height, 2 * -Math.PI, 2 * Math.PI, 2, 2, 9, 5);
         }
 
         private void Timer1_Tick(object sender, EventArgs e)
         {
+            graph.DrawGraph(graphics, brush);
             label1.Text = network.MAE(inputs, outputs).ToString();
+
+            graph.DrawSineWave(graphics, brush);
+            /*
+            //drawing regular sine wave
             for (float x = 0; x < Width; x += 0.5f)
             {
                 graphics.FillRectangle(brush, new RectangleF(x, Height / 2 + 100 * (float)Math.Sin(x / 50), 2, 2));
             }
+
+            //ai drawing sine wave
             for (float x = 0; x < Width; x += 0.5f)
             {
                 double calcY = network.Compute(new double[] { x / 50 })[0];
                 graphics.FillRectangle(brush, new RectangleF(x, Height / 2 + 100 * (float)calcY, 2, 2));
             }
-            for (int i = 0; i < 5000; i++)
-            {
-                trainer.GradientDescent(inputs, outputs);
-            }
+            //for (int i = 0; i < 5000; i++)
+            //{
+            //    trainer.GradientDescent(inputs, outputs);
+            //*/
 
-            graphics.Clear(Color.White);
+            //graphics.Clear(Color.White);
         }
 
         private void Form1_Shown(object sender, EventArgs e)
