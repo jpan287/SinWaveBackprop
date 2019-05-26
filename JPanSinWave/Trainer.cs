@@ -53,7 +53,7 @@ namespace JPanBackprop
             {
                 Neuron neuron = outputLayer.Neurons[i];
                 double error = (desiredOutput[i] - neuron.Output);
-                neuron.PartialDerivative = error * neuron.Derivative(neuron.Input);
+                neuron.PartialDerivative = error * neuron.ActDerivative(neuron.Input);
             }
 
             for (int i = network.Layers.Length - 2; i >= 0; i--)
@@ -71,7 +71,7 @@ namespace JPanBackprop
                         error += nextNeuron.PartialDerivative * nextNeuron.Weights[j];
                     }
 
-                    neuron.PartialDerivative = error * neuron.Derivative(neuron.Input);
+                    neuron.PartialDerivative = error * neuron.ActDerivative(neuron.Input);
                 }
             }
         }

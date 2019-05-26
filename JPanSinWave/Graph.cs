@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JPanBackprop;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -32,7 +33,7 @@ namespace JPanSinWave
             yLines = YLines;
         }
 
-        public void DrawGraph(Graphics graphics, Brush brush)
+        public void DrawGraph(Graphics graphics, SolidBrush brush)
         {
             graphics.FillRectangle(brush, 0, origin.Y - 2, windowWidth, 3);
             graphics.FillRectangle(brush, origin.X - 2, 0, 3, windowHeight);
@@ -46,13 +47,23 @@ namespace JPanSinWave
             }
         }
         
-        public void DrawSineWave(Graphics graphics, Brush brush)
+        public void DrawSineWave(Graphics graphics, SolidBrush brush)
         {
             for (double x = leftBound; x <= rightBound; x += (rightBound - leftBound) / 750)
             {
                 double xPos = origin.X + x * origin.X / Math.Abs(leftBound);
-                double yPos = Math.Sin(x);// * origin.Y / topBound;
-                graphics.FillRectangle(brush, (float)(Math.Abs(xPos)), (float)(origin.Y + yPos * origin.Y / topBound), 2, 2);
+                double yPos = origin.Y + Math.Sin(x) * origin.Y / topBound;
+                graphics.FillRectangle(brush, (float)(Math.Abs(xPos)), (float)(yPos), 2, 2);
+            }
+        }
+
+        public void DrawAIWave(Graphics graphics, Brush brush, Network network)
+        {
+            for (double x = leftBound; x <= rightBound; x += (rightBound - leftBound) / 750)
+            {
+                double xPos = origin.X + x * origin.X / Math.Abs(leftBound);
+                double yPos = origin.Y + network.Compute(new double[] { x })[0] * origin.Y / topBound;
+                graphics.FillRectangle(brush, (float)(Math.Abs(xPos)), (float)(yPos), 2, 2);
             }
         }
     }

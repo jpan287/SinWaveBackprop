@@ -13,15 +13,17 @@ namespace JPanBackprop
         public double Output;
         public double Input;
         public Func<double, double> Activation;
+        public Func<double, double> ActDerivative;
         public double PartialDerivative;
         public double BiasUpdate;
         public double PrevBiasUpdate;
         public double[] WeightUpdates;
         public double[] PrevWeightUpdates;
 
-        public Neuron(Func<double, double> activation, int inputCount)
+        public Neuron(Func<double, double> activation, Func<double, double> actDerivative, int inputCount)
         {
             Activation = activation;
+            ActDerivative = actDerivative;
             Weights = new double[inputCount];
             WeightUpdates = new double[inputCount];
             PrevWeightUpdates = new double[inputCount];
@@ -49,14 +51,14 @@ namespace JPanBackprop
             return Output;
         }
 
-        public double Derivative(double x)
+        /*public double Derivative(double x)
         {
             return 1 - Math.Pow(Function(x), 2);
-        }
+        }*/
 
-        public double Function(double x)
+        /*public double Function(double x)
         {
-            return (Math.Exp(x) - Math.Exp(-x)) / (Math.Exp(x) + Math.Exp(-x));
-        }
+            return (Math.Pow(Math.E, x) - Math.Pow(Math.E, -x)) / (Math.Pow(Math.E, x) + Math.Pow(Math.E, -x));
+        }*/
     }
 }

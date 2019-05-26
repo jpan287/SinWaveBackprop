@@ -11,14 +11,14 @@ namespace JPanBackprop
         public Layer[] Layers;
         public double[] Output => Layers[Layers.Length - 1].Output;
 
-        public Network(Func<double, double> activation, int inputCount, params int[] neuronsPerLayer)
+        public Network(Func<double, double> activation, Func<double, double> actDerivative, int inputCount, params int[] neuronsPerLayer)
         {
             Layers = new Layer[neuronsPerLayer.Length];
 
-            Layers[0] = new Layer(activation, inputCount, neuronsPerLayer[0]);
+            Layers[0] = new Layer(activation, actDerivative, inputCount, neuronsPerLayer[0]);
             for (int i = 1; i < neuronsPerLayer.Length; i++)
             {
-                Layers[i] = new Layer(activation, neuronsPerLayer[i - 1], neuronsPerLayer[i]);
+                Layers[i] = new Layer(activation, actDerivative, neuronsPerLayer[i - 1], neuronsPerLayer[i]);
             }
         }
 
