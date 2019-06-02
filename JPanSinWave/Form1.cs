@@ -1,4 +1,5 @@
 ﻿using JPanBackprop;
+using MachineLearning;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,18 +16,23 @@ namespace JPanSinWave
     {
         Control control = new Control();
         Random rand = new Random();
-        Network network = new Network(a => (Math.Pow(Math.E, a) - Math.Pow(Math.E, -a)) / (Math.Pow(Math.E, a) + Math.Pow(Math.E, -a)), 
-            a => (1 - Math.Pow((Math.Pow(Math.E, a) - Math.Pow(Math.E, -a)) / (Math.Pow(Math.E, a) + Math.Pow(Math.E, -a)), 2)), 1, 3, 1);
+
+        Network gdnetwork = new Network(a => (Math.Pow(Math.E, a) - Math.Pow(Math.E, -a)) / (Math.Pow(Math.E, a) + Math.Pow(Math.E, -a)), 
+            a => (1 - Math.Pow((Math.Pow(Math.E, a) - Math.Pow(Math.E, -a)) / (Math.Pow(Math.E, a) + Math.Pow(Math.E, -a)), 2)), 1, 16, 1);
+        Network geneticNetwork = new Network(a => (Math.Pow(Math.E, a) - Math.Pow(Math.E, -a)) / (Math.Pow(Math.E, a) + Math.Pow(Math.E, -a)),
+            a => (1 - Math.Pow((Math.Pow(Math.E, a) - Math.Pow(Math.E, -a)) / (Math.Pow(Math.E, a) + Math.Pow(Math.E, -a)), 2)), 1, 8, 1);
+
         SolidBrush brush = new SolidBrush(Color.Black);
-        SolidBrush aiBrush = new SolidBrush(Color.Red);
+        SolidBrush gdBrush = new SolidBrush(Color.Red);
+        SolidBrush geneticBrush = new SolidBrush(Color.Green);
+
         Trainer trainer;
+        GeneticTrainer genetic;
         Graphics graphics;
         Graph graph;
+
         double[][] inputs;
         double[][] outputs;
-
-        double leftTrainBound;
-        double rightTrainBound;
 
         public Form1()
         {
@@ -34,11 +40,14 @@ namespace JPanSinWave
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-            leftTrainBound = 0;
-            rightTrainBound = 300;
-            trainer = new Trainer(network);
             graphics = this.CreateGraphics();
-            network.Randomize(rand);
+
+            trainer = new Trainer(gdnetwork);
+            genetic = new GeneticTrainer();
+
+            gdnetwork.Randomize(rand);
+            geneticNetwork.Randomize(rand);
+
             inputs = new double[20][];
             outputs = new double[20][];
             for (int i = 0; i < inputs.Length; i++)
@@ -46,25 +55,33 @@ namespace JPanSinWave
                 inputs[i] = new double[1];
                 outputs[i] = new double[1];
             }
-            for (int i = 0; i < outputs.Length; i++)
+
+            graph = new Graph(Width, Height, 2 * -Math.PI, 2 * Math.PI, 2, 2, 8, 5);
+
+            int count = 0;
+            for (double x = -Math.PI; x < Math.PI; x += 2 * Math.PI / outputs.Length)
             {
-                inputs[i][0] = i * (rightTrainBound - leftTrainBound) / outputs.Length;
-                outputs[i][0] = Math.Sin(i * (rightTrainBound - leftTrainBound) / outputs.Length);
+                inputs[count][0] = x;
+                outputs[count][0] = Math.Sin(x);
+                count++;
             }
-            graph = new Graph(Width, Height, 2 * -Math.PI, 2 * Math.PI, 2, 2, 9, 5);
         }
 
         private void Timer1_Tick(object sender, EventArgs e)
         {
             graph.DrawGraph(graphics, brush);
-            label1.Text = network.MAE(inputs, outputs).ToString();
-
+            label1.Text = gdnetwork.MAE(inputs, outputs).ToString();
             graph.DrawSineWave(graphics, brush);
 
-            graph.DrawAIWave(graphics, aiBrush, network);
+            graph.DrawAIWave(graphics, gdBrush, gdnetwork);
             for (int i = 0; i < 2000; i++)
             {
-                trainer.GradientDescent(inputs, outputs);
+                trainer.SGD(inputs, outputs, 1);
+            }
+            graph.DrawAIWave(graphics, geneticBrush, geneticNetwork);
+            for (int i = 0; i < 200; i++)
+            {
+                genetic.Train((geneticNetwork, ))
             }
 
             graphics.Clear(Color.White);

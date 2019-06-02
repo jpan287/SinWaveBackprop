@@ -122,14 +122,14 @@ namespace JPanBackprop
                     neuron.Bias += biasChange;
                     neuron.PrevBiasUpdate = biasChange;
                 }
-            }   
+            }
         }
-        
-        public void SGD(double[] inputs, double[] desiredOutputs, int batchSize)
+
+        public void SGD(ReadOnlySpan<double[]> inputs, ReadOnlySpan<double[]> desiredOutputs, int batchSize)
         {
             for (int i = 0; i < inputs.Length; i += batchSize)
             {
-                GradientDescent(inputs.)
+                GradientDescent(inputs.Slice(i, batchSize).ToArray(), desiredOutputs.Slice(i, batchSize).ToArray());
             }
         }
     }

@@ -18,3 +18,12 @@ C:\Users\Lumastars3\Documents\Visual Studio 2019\Projects\SinWaveBackprop\JPanSi
 C:\Users\Lumastars3\Documents\Visual Studio 2019\Projects\SinWaveBackprop\JPanSinWave\obj\Debug\JPanSinWave.csproj.CoreCompileInputs.cache
 C:\Users\Lumastars3\Documents\Visual Studio 2019\Projects\SinWaveBackprop\JPanSinWave\obj\Debug\JPanSinWave.exe
 C:\Users\Lumastars3\Documents\Visual Studio 2019\Projects\SinWaveBackprop\JPanSinWave\obj\Debug\JPanSinWave.pdb
+\\GMRDC1\Folder Redirection\Johnny.Pan\Documents\Visual Studio 2019\Projects\JPanSinWave\JPanSinWave\bin\Debug\System.Buffers.dll
+\\GMRDC1\Folder Redirection\Johnny.Pan\Documents\Visual Studio 2019\Projects\JPanSinWave\JPanSinWave\bin\Debug\System.Memory.dll
+\\GMRDC1\Folder Redirection\Johnny.Pan\Documents\Visual Studio 2019\Projects\JPanSinWave\JPanSinWave\bin\Debug\System.Numerics.Vectors.dll
+\\GMRDC1\Folder Redirection\Johnny.Pan\Documents\Visual Studio 2019\Projects\JPanSinWave\JPanSinWave\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+\\GMRDC1\Folder Redirection\Johnny.Pan\Documents\Visual Studio 2019\Projects\JPanSinWave\JPanSinWave\bin\Debug\System.Buffers.xml
+\\GMRDC1\Folder Redirection\Johnny.Pan\Documents\Visual Studio 2019\Projects\JPanSinWave\JPanSinWave\bin\Debug\System.Memory.xml
+\\GMRDC1\Folder Redirection\Johnny.Pan\Documents\Visual Studio 2019\Projects\JPanSinWave\JPanSinWave\bin\Debug\System.Numerics.Vectors.xml
+\\GMRDC1\Folder Redirection\Johnny.Pan\Documents\Visual Studio 2019\Projects\JPanSinWave\JPanSinWave\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+\\GMRDC1\Folder Redirection\Johnny.Pan\Documents\Visual Studio 2019\Projects\JPanSinWave\JPanSinWave\obj\Debug\JPanSinWave.csproj.CopyComplete
