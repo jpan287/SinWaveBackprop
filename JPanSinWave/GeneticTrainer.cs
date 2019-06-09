@@ -13,7 +13,7 @@ namespace MachineLearning
 
         public void Train((Network net, double fitness)[] population, Random random, double mutationRate)
         {
-            Array.Sort(population, (a, b) => b.fitness.CompareTo(a.fitness));
+            Array.Sort(population, (a, b) => a.fitness.CompareTo(b.fitness));
 
             int start = (int)(population.Length * 0.1);
             int end = (int)(population.Length * 0.9);

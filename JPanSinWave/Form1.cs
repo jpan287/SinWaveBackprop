@@ -19,8 +19,8 @@ namespace JPanSinWave
 
         Network gdnetwork = new Network(a => (Math.Pow(Math.E, a) - Math.Pow(Math.E, -a)) / (Math.Pow(Math.E, a) + Math.Pow(Math.E, -a)), 
             a => (1 - Math.Pow((Math.Pow(Math.E, a) - Math.Pow(Math.E, -a)) / (Math.Pow(Math.E, a) + Math.Pow(Math.E, -a)), 2)), 1, 16, 1);
-        Network geneticNetwork = new Network(a => (Math.Pow(Math.E, a) - Math.Pow(Math.E, -a)) / (Math.Pow(Math.E, a) + Math.Pow(Math.E, -a)),
-            a => (1 - Math.Pow((Math.Pow(Math.E, a) - Math.Pow(Math.E, -a)) / (Math.Pow(Math.E, a) + Math.Pow(Math.E, -a)), 2)), 1, 8, 1);
+        Network[] geneticNetworks = new Network[100];
+        (Network, double)[] population = new (Network, double)[100];
 
         SolidBrush brush = new SolidBrush(Color.Black);
         SolidBrush gdBrush = new SolidBrush(Color.Red);
@@ -46,7 +46,6 @@ namespace JPanSinWave
             genetic = new GeneticTrainer();
 
             gdnetwork.Randomize(rand);
-            geneticNetwork.Randomize(rand);
 
             inputs = new double[20][];
             outputs = new double[20][];
@@ -65,23 +64,39 @@ namespace JPanSinWave
                 outputs[count][0] = Math.Sin(x);
                 count++;
             }
+
+            for (int i = 0; i < geneticNetworks.Length; i++)
+            {
+                geneticNetworks[i] = new Network(a => (Math.Pow(Math.E, a) - Math.Pow(Math.E, -a)) / (Math.Pow(Math.E, a) + Math.Pow(Math.E, -a)),
+            a => (1 - Math.Pow((Math.Pow(Math.E, a) - Math.Pow(Math.E, -a)) / (Math.Pow(Math.E, a) + Math.Pow(Math.E, -a)), 2)), 1, 10, 1);
+                geneticNetworks[i].Randomize(rand);
+                population[i] = (geneticNetworks[i], geneticNetworks[i].MAE(inputs, outputs));
+            }
         }
 
         private void Timer1_Tick(object sender, EventArgs e)
         {
             graph.DrawGraph(graphics, brush);
-            label1.Text = gdnetwork.MAE(inputs, outputs).ToString();
             graph.DrawSineWave(graphics, brush);
+
+            Array.Sort(population, (a, b) => a.Item2.CompareTo(b.Item2));
+            label1.Text = gdnetwork.MAE(inputs, outputs).ToString();
+            label2.Text = population[0].Item2.ToString();
+            graph.DrawAIWave(graphics, geneticBrush, population[0].Item1);
+            for (int i = 0; i < population.Length; i++)
+            {
+                population[i].Item2 = geneticNetworks[i].MAE(inputs, outputs);
+            }
+            for (int i = 0; i < 8000; i++)
+            {
+                genetic.Train(population, rand, 0.25);
+            }
+            Array.Sort(population, (a, b) => a.Item2.CompareTo(b.Item2));
 
             graph.DrawAIWave(graphics, gdBrush, gdnetwork);
             for (int i = 0; i < 2000; i++)
             {
                 trainer.SGD(inputs, outputs, 1);
-            }
-            graph.DrawAIWave(graphics, geneticBrush, geneticNetwork);
-            for (int i = 0; i < 200; i++)
-            {
-                genetic.Train((geneticNetwork, ))
             }
 
             graphics.Clear(Color.White);
